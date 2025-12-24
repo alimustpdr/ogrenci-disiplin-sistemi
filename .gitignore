@@ -1,0 +1,38 @@
+# Config files (use config-sample.php as template)
+config.php
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Temporary files
+tmp/
+temp/
+*.tmp
+
+# Log files
+*.log
+logs/
+
+# Backup files
+*.bak
+*.backup
+
+# Dependencies (if using Composer)
+vendor/
+composer.lock
+
+# Environment files
+.env
+.env.local
+
+# Upload directories (if added later)
+uploads/
+files/

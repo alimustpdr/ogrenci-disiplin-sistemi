@@ -1,130 +1,226 @@
-# Öğrenci Disiplin Sistemi
+# Öğrenci Disiplin Takip Sistemi
 
 ## 📋 Proje Açıklaması
 
-Öğrenci Disiplin Sistemi, eğitim kurumlarının öğrenci davranışlarını takip etmek, disiplin kurallarını yönetmek ve cezalandırma işlemlerini digitalize etmek için tasarlanmış bir yönetim sistemidir.
+Öğrenci Disiplin Takip Sistemi, eğitim kurumlarının öğrenci davranışlarını takip etmek, disiplin kurallarını yönetmek ve disiplin süreçlerini dijitalleştirmek için geliştirilmiş modern bir web uygulamasıdır.
 
 Bu sistem, okul yöneticilerinin, öğretmenlerin ve öğrencilerin disiplin süreçlerini daha verimli bir şekilde yönetmesine olanak sağlar.
 
 ## ✨ Özellikler
 
-- 👥 **Kullanıcı Yönetimi**: Yönetici, öğretmen ve öğrenci rollerine göre erişim kontrolü
-- 📝 **Olay Kaydı**: Disiplin olaylarının detaylı kaydı ve takibi
-- ⚖️ **Ceza Yönetimi**: Uygun cezalandırma prosedürlerinin uygulanması
-- 📊 **Raporlama**: Öğrenci ve sınıf bazında disiplin raporları
-- 🔔 **Bildirimler**: Veliler ve öğretmenlere otomatik bildirim sistemi
-- 📱 **Responsive Tasarım**: Mobil ve masaüstü cihazlarla uyumlu arayüz
-- 🔐 **Güvenlik**: Güvenli giriş ve rol tabanlı erişim kontrolü
+### 🔐 Güvenli Kullanıcı Yönetimi
+- Şifreler veritabanında **hash'lenerek** saklanır
+- Üç farklı kullanıcı rolü: **Yönetici**, **Öğretmen**, **Öğrenci**
+- Rol tabanlı erişim kontrolü
+
+### 👨‍💼 Yönetici (Admin) Özellikleri
+- Sisteme tam erişim
+- Öğretmen ve öğrenci oluşturma, düzenleme, silme
+- Tüm disiplin kayıtlarını görüntüleme ve yönetme
+- Detaylı raporlama ve istatistikler
+- PDF/Yazdırma desteği ile rapor oluşturma
+
+### 👨‍🏫 Öğretmen Özellikleri
+- Öğrencilere disiplin kaydı ekleme
+- Kendi eklediği kayıtları düzenleme ve silme
+- Tüm kayıtları görüntüleme
+- Son eklenen kayıtları takip etme
+
+### 👨‍🎓 Öğrenci Özellikleri
+- Sadece kendi disiplin kayıtlarını görüntüleme
+- Kişisel profil bilgileri
+- Salt okunur erişim (düzenleme/silme yok)
+
+### 📊 Raporlama ve İstatistikler
+- Tarih aralığına göre filtreleme
+- Öğrenciye özel veya toplu raporlar
+- Kayıt tipi bazında istatistikler
+- Yazdırma dostu görünüm
+- PDF olarak kaydetme desteği
+
+### 🔒 Güvenlik Önlemleri
+- Prepared statements ile SQL enjeksiyonu koruması
+- XSS saldırılarına karşı veri temizleme
+- CSRF token koruması
+- Güvenli session yönetimi
+- .htaccess ile sunucu güvenliği
 
 ## 🛠️ Teknoloji Stack
 
 ### Backend
-- **Dil**: [Belirtilecek - örn: Python, Node.js, Java, vb.]
-- **Framework**: [Belirtilecek - örn: Django, Express, Spring, vb.]
-- **Veritabanı**: [Belirtilecek - örn: PostgreSQL, MySQL, MongoDB, vb.]
+- **Dil**: PHP 7.4+
+- **Mimari**: OOP (Nesne Yönelimli Programlama)
+- **Veritabanı**: MySQL / MariaDB
+- **Güvenlik**: PDO Prepared Statements, Password Hashing
 
 ### Frontend
-- **Framework**: [Belirtilecek - örn: React, Vue, Angular, vb.]
-- **Styling**: [Belirtilecek - örn: Tailwind CSS, Bootstrap, vb.]
-- **HTTP Client**: [Belirtilecek - örn: Axios, Fetch API, vb.]
+- **Framework**: Bootstrap 5
+- **İkonlar**: Bootstrap Icons
+- **Stil**: Modern, mobil uyumlu, gradient tasarım
+- **JavaScript**: Vanilla JS
 
 ## 📦 Kurulum
 
 ### Gereksinimler
-- [Belirtilecek - örn: Python 3.8+, Node.js 14+, vb.]
-- [Belirtilecek - örn: pip, npm, vb.]
-- Git
+- **PHP**: 7.4 veya üzeri
+- **MySQL/MariaDB**: 5.7 veya üzeri
+- **Web Server**: Apache 2.4+ (mod_rewrite etkin)
+- **Tarayıcı**: Modern web tarayıcı (Chrome, Firefox, Edge, Safari)
 
-### Adımlar
+### Kurulum Adımları
 
-1. **Depoyu klonlayın**
+1. **Depoyu klonlayın veya indirin**
 ```bash
 git clone https://github.com/alimustpdr/ogrenci-disiplin-sistemi.git
 cd ogrenci-disiplin-sistemi
 ```
 
-2. **Backend kurulumu**
-```bash
-# [Belirtilecek - örn: Python ortamı]
-# python -m venv venv
-# source venv/bin/activate  # Linux/Mac
-# venv\Scripts\activate     # Windows
-
-# Bağımlılıkları yükleyin
-# pip install -r requirements.txt
+2. **Veritabanını oluşturun**
+- MySQL/MariaDB'ye giriş yapın
+- Yeni bir veritabanı oluşturun:
+```sql
+CREATE DATABASE student_discipline CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 ```
 
-3. **Frontend kurulumu**
+3. **Veritabanı tablolarını içe aktarın**
+- `database.sql` dosyasını içe aktarın:
 ```bash
-cd frontend
-npm install
+mysql -u kullanici_adi -p student_discipline < database.sql
+```
+veya phpMyAdmin üzerinden `database.sql` dosyasını import edin.
+
+4. **Yapılandırma dosyasını oluşturun**
+- `config-sample.php` dosyasını kopyalayın ve `config.php` olarak kaydedin:
+```bash
+cp config-sample.php config.php
+```
+- `config.php` dosyasını düzenleyin ve veritabanı bilgilerinizi girin:
+```php
+define('DB_HOST', 'localhost');
+define('DB_USER', 'veritabani_kullanici_adi');
+define('DB_PASS', 'veritabani_sifresi');
+define('DB_NAME', 'student_discipline');
 ```
 
-4. **Veritabanı yapılandırması**
-```bash
-# [Belirtilecek - migration komutları]
-# python manage.py migrate  # Örnek
-```
+5. **Web sunucusunu yapılandırın**
+- Projeyi web sunucunuzun root dizinine veya bir alt dizine kopyalayın
+- Apache'de `mod_rewrite` modülünün etkin olduğundan emin olun
+- `.htaccess` dosyasının çalıştığından emin olun
 
-5. **Uygulamayı başlatın**
+6. **İzinleri ayarlayın**
 ```bash
-# Backend
-# python manage.py runserver
-
-# Frontend (yeni terminal)
-npm start
+chmod 644 config.php
+chmod 755 public
 ```
 
 ## 🚀 Kullanım
 
-### Giriş
-- **URL**: `http://localhost:3000`
-- **Varsayılan Giriş Bilgileri**: [Belirtilecek]
+### Sisteme Giriş
+- Tarayıcınızda projenin URL'ini açın: `http://localhost/ogrenci-disiplin-sistemi/`
+- Giriş ekranında kullanıcı türünü seçin (Kullanıcı/Öğrenci)
+
+### Varsayılan Giriş Bilgileri
+
+#### Yönetici
+- **Kullanıcı Adı**: `admin`
+- **Şifre**: `admin123`
+
+#### Öğretmen (Demo)
+- **Kullanıcı Adı**: `ogretmen`
+- **Şifre**: `ogretmen123`
+
+#### Öğrenci (Demo)
+- **Öğrenci No**: `2024001`
+- **Şifre**: `ogrenci123`
+
+> ⚠️ **Önemli**: İlk girişten sonra varsayılan şifreleri mutlaka değiştirin!
 
 ### Temel İşlemler
 
-#### Yönetici
-- Kullanıcı yönetimi
-- Disiplin kurallarının tanımlanması
-- Raporları görüntüleme
+#### Yönetici Olarak
+1. **Dashboard**: Sistem geneli istatistikleri görüntüleme
+2. **Öğrenci Yönetimi**: Yeni öğrenci ekleme, düzenleme, silme
+3. **Öğretmen Yönetimi**: Kullanıcı oluşturma ve yönetme
+4. **Disiplin Kayıtları**: Tüm kayıtları görüntüleme ve yönetme
+5. **Raporlama**: Detaylı raporlar oluşturma ve PDF'e aktarma
 
-#### Öğretmen
-- Disiplin olaylarını kaydetme
-- Öğrenci davranışlarını takip etme
-- Raporları görüntüleme
+#### Öğretmen Olarak
+1. **Dashboard**: Eklediğiniz kayıtları görüntüleme
+2. **Yeni Kayıt Ekleme**: Öğrencilere disiplin kaydı ekleme
+3. **Kayıtları Düzenleme**: Kendi kayıtlarınızı güncelleme
+4. **Profil**: Şifre değiştirme
 
-#### Öğrenci ve Veliler
-- Kayıtlı disiplin olaylarını görüntüleme
-- Bildirimleri kontrol etme
+#### Öğrenci Olarak
+1. **Dashboard**: Kişisel bilgiler ve özet istatistikler
+2. **Disiplin Kayıtlarım**: Tüm kayıtlarınızı görüntüleme
+3. **Profil**: Bilgilerinizi görüntüleme ve şifre değiştirme
 
 ## 📁 Proje Yapısı
 
 ```
 ogrenci-disiplin-sistemi/
-├── backend/
-│   ├── app/
-│   ├── config/
-│   ├── requirements.txt
-│   └── manage.py
-├── frontend/
-│   ├── src/
-│   ├── public/
-│   ├── package.json
-│   └── README.md
-├── docs/
-│   ├── API.md
-│   ├── DATABASE.md
-│   └── KULLANICILAR.md
-├── .gitignore
-├── LICENSE
-└── README.md
+├── config/
+│   └── config.php              # Veritabanı yapılandırması
+├── src/
+│   ├── models/                 # Model sınıfları (OOP)
+│   │   ├── Database.php        # Veritabanı bağlantısı
+│   │   ├── User.php            # Kullanıcı yönetimi
+│   │   ├── Student.php         # Öğrenci yönetimi
+│   │   └── DisciplineRecord.php # Disiplin kayıtları
+│   ├── views/                  # Görünüm dosyaları
+│   │   └── layouts/
+│   │       └── main.php        # Ana layout şablonu
+│   └── helpers.php             # Yardımcı fonksiyonlar
+├── public/                     # Sayfa dosyaları
+│   ├── login.php               # Giriş sayfası
+│   ├── dashboard.php           # Anasayfa
+│   ├── profile.php             # Profil sayfası
+│   ├── records.php             # Kayıt yönetimi
+│   ├── admin/                  # Admin sayfaları
+│   │   ├── students.php
+│   │   ├── teachers.php
+│   │   └── reports.php
+│   └── student/                # Öğrenci sayfaları
+│       └── records.php
+├── assets/                     # Statik dosyalar
+│   ├── css/
+│   ├── js/
+│   └── images/
+├── index.php                   # Ana giriş noktası
+├── database.sql                # Veritabanı şeması
+├── config-sample.php           # Örnek yapılandırma
+├── .htaccess                   # Apache yapılandırması
+├── .gitignore                  # Git ignore dosyası
+└── README.md                   # Bu dosya
 ```
 
-## 📚 Dokumentasyon
+## 🔒 Güvenlik
 
-- **API Dokümantasyonu**: `docs/API.md`
-- **Veritabanı Şeması**: `docs/DATABASE.md`
-- **Kullanıcı Rehberi**: `docs/KULLANICILAR.md`
+### Uygulanan Güvenlik Önlemleri
+- ✅ Parolalar bcrypt ile hash'lenerek saklanır
+- ✅ Tüm veritabanı sorguları prepared statements kullanır
+- ✅ Kullanıcı girdileri XSS'e karşı temizlenir (htmlspecialchars)
+- ✅ CSRF token koruması
+- ✅ Session güvenliği
+- ✅ Rol tabanlı erişim kontrolü
+- ✅ .htaccess ile config dosyaları koruması
+
+### Güvenlik Tavsiyeleri
+1. İlk kurulumdan sonra varsayılan şifreleri değiştirin
+2. Canlı ortamda `config.php` dosyasındaki hata raporlamayı kapatın
+3. Düzenli olarak veritabanı yedeği alın
+4. SSL/TLS sertifikası kullanın (HTTPS)
+5. Güçlü şifreler kullanın (en az 8 karakter, harf, rakam, özel karakter)
+
+## 📚 Veritabanı Şeması
+
+### Tablolar
+- **users**: Yönetici ve öğretmen bilgileri
+- **students**: Öğrenci bilgileri
+- **discipline_records**: Disiplin kayıtları
+- **sessions**: Oturum bilgileri (isteğe bağlı)
+
+Detaylı şema için `database.sql` dosyasına bakınız.
 
 ## 🤝 Katkıda Bulunma
 
@@ -144,6 +240,16 @@ Hata bulduysanız, lütfen [Issues](https://github.com/alimustpdr/ogrenci-disipl
 
 Bu proje [MIT](LICENSE) lisansı altında lisanslanmıştır.
 
+## 🔄 Gelecek Özellikler
+
+- [ ] E-posta bildirimleri
+- [ ] SMS entegrasyonu
+- [ ] Toplu öğrenci içe aktarma (Excel/CSV)
+- [ ] Gelişmiş filtreleme ve grafik raporları
+- [ ] Mobil uygulama
+- [ ] API desteği
+- [ ] Çoklu dil desteği
+
 ## 👨‍💻 Yazar
 
 **Ali Mustafa Pdr**
@@ -153,7 +259,14 @@ Bu proje [MIT](LICENSE) lisansı altında lisanslanmıştır.
 
 Sorularınız veya önerileriniz için benimle iletişime geçebilirsiniz.
 
+## 🙏 Teşekkürler
+
+Bu projeyi kullandığınız için teşekkür ederiz. İyi kullanımlar!
+
 ---
 
 **Son Güncelleme**: 2025-12-24
+
+**Versiyon**: 1.0.0
+
 
