@@ -1,0 +1,149 @@
+/* Custom Styles for Student Discipline Tracking System */
+
+/* Print styles */
+@media print {
+    .no-print,
+    .sidebar,
+    .top-navbar,
+    nav,
+    .btn,
+    button,
+    form {
+        display: none !important;
+    }
+    
+    body {
+        background: white !important;
+    }
+    
+    main {
+        margin: 0 !important;
+        padding: 20px !important;
+    }
+    
+    .card {
+        border: 1px solid #ddd !important;
+        box-shadow: none !important;
+        page-break-inside: avoid;
+    }
+    
+    .badge {
+        border: 1px solid #333 !important;
+        color: #000 !important;
+        background-color: #fff !important;
+    }
+    
+    table {
+        font-size: 12px;
+    }
+    
+    .print-header {
+        margin-bottom: 30px;
+        border-bottom: 2px solid #333;
+        padding-bottom: 20px;
+    }
+}
+
+/* Responsive improvements */
+@media (max-width: 768px) {
+    .sidebar {
+        transform: translateX(-100%);
+        transition: transform 0.3s ease;
+    }
+    
+    .sidebar.show {
+        transform: translateX(0);
+    }
+    
+    .table-responsive {
+        font-size: 0.85rem;
+    }
+    
+    .btn-sm {
+        padding: 0.25rem 0.5rem;
+        font-size: 0.75rem;
+    }
+}
+
+/* Loading spinner (optional) */
+.spinner {
+    border: 3px solid #f3f3f3;
+    border-top: 3px solid #667eea;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    animation: spin 1s linear infinite;
+    margin: 20px auto;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Smooth transitions */
+.card,
+.btn,
+.nav-link,
+.form-control,
+.form-select {
+    transition: all 0.3s ease;
+}
+
+/* Hover effects */
+.table tbody tr:hover {
+    background-color: #f8f9fa;
+    cursor: pointer;
+}
+
+.card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1) !important;
+}
+
+/* Status badges */
+.badge {
+    font-weight: 500;
+    padding: 0.4em 0.6em;
+}
+
+/* Form improvements */
+.form-control:focus,
+.form-select:focus {
+    border-color: #667eea;
+    box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25);
+}
+
+/* Alert animations */
+.alert {
+    animation: slideIn 0.3s ease;
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
